@@ -93,9 +93,11 @@ var doNameReplacement = function() {
 };
 
 function doImageBlurring() {
-  $('img.profilePic').blurjs( { radius: 10 } );
-  $('img.UFIActorImage').blurjs( { radius: 10 } );
-  $('a.actorPhoto').blurjs( { radius: 10 } );
+//  $('img.profilePic').blurjs( { radius: 10 } );
+  $('.UFIActorImage').blurjs( { radius: 10 } );
+//  $('a.actorPhoto').blurjs( { radius: 10 } );
+  $('.actorPhoto, .UFIActorImage').css('-webkit-filter', 'blur(6px)');
+  console.log('did it');
 }
 
 $(document).ready(function() {
