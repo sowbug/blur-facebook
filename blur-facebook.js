@@ -33,6 +33,8 @@ function genColors() {
   genColorBunch(128);
   genColorBunch(64);
   genColorBunch(192);
+  genColorBunch(96);
+  genColorBunch(160);
   genColorBunch(32);
 }
 
@@ -47,8 +49,8 @@ function getNextColor() {
 function getNextReplacement() {
   var color = getNextColor();
   var replacement =
-      '<span style="color:' + color + ';background-color:' +
-      color + '">xxxxxxxx</span>';
+    '<span style="color:' + color + ';background-color:' +
+    color + '">xxxxxxxx</span>';
   return replacement;
 }
 
@@ -68,43 +70,39 @@ var replaceName = function(e) {
 };
 
 var doNameReplacement = function() {
-  var elements = $('a.UFICommentActorName');
-  elements = $.merge(elements, $('.actorName > a'));
-  elements = $.merge(elements, $('a.passiveName'));
+  var elements = $('#contentArea a.UFICommentActorName');
+  elements = $.merge(elements, $('#contentArea .actorName > a'));
+  elements = $.merge(elements, $('#contentArea a.passiveName'));
 
-  $('a').each(function() {
+  $('#contentArea a').each(function() {
     var hovercard = $(this).attr('data-hovercard');
     if (hovercard) {
       if (hovercard.match(/\/user.php\?/)) {
-	elements.push($(this));
+	      elements.push($(this));
       }
     }
   });
 
-  $('li.UFILikeSentence a').each(function() {
+  $('#contentArea li.UFILikeSentence a').each(function() {
     if ($(this).attr('data-hovercard')) {
       elements.push($(this));
     }
   });
 
-  $.unique(elements).each(function(index) {
+    $.unique(elements).each(function(index) {
     replaceName($(this));
   });
 };
 
 function doImageBlurring() {
-//  $('img.profilePic').blurjs( { radius: 10 } );
-  $('.UFIActorImage').blurjs( { radius: 10 } );
-//  $('a.actorPhoto').blurjs( { radius: 10 } );
-  $('.actorPhoto, .UFIActorImage').css('-webkit-filter', 'blur(6px)');
-  console.log('did it');
+  $('.actorPhoto, .UFIActorImage, .profilePic').css(
+      '-webkit-filter', 'blur(5px)');
 }
 
-$(document).ready(function() {
-  genColors();
-  resetMaps();
-  $('#pageHead').hover(function() {
-    doNameReplacement();
-    doImageBlurring();
-  });
+genColors();
+resetMaps();
+chrome.extension.onRequest.addListener(function(r, s, sendResponse) {
+  doNameReplacement();
+  doImageBlurring();
+  sendResponse({});
 });
