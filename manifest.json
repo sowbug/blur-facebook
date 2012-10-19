@@ -1,11 +1,14 @@
 {
   "name": "Blur Facebook",
   "description": "Quickly prepares a Facebook comment stream for an anonymized screenshot.",
-  "version": "0.1",
+  "version": "0.1.1",
   "manifest_version": 2,
 
   "permissions": [
-    "contextMenus"
+    "contextMenus",
+    "tabs",
+    "http://www.facebook.com/*",
+    "https://www.facebook.com/*"
   ],
 
   "icons": {
@@ -15,16 +18,7 @@
   },
 
   "background": {
-    "scripts" : ["jquery-1.8.2.min.js", "background.js"]
-  },
-
-  "content_scripts": [
-    {
-      "matches": [
-      "http://www.facebook.com/*",
-      "https://www.facebook.com/*"
-      ],
-      "js": [ "jquery-1.8.2.min.js", "blur-facebook.js" ]
-    }
-  ]
+    "scripts" : ["jquery-1.8.2.min.js", "event_page.js", "blur_facebook.js"],
+    "persistent": false
+  }
 }

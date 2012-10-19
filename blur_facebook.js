@@ -49,8 +49,8 @@ function getNextColor() {
 function getNextReplacement() {
   var color = getNextColor();
   var replacement =
-    '<span style="color:' + color + ';background-color:' +
-    color + '">xxxxxxxx</span>';
+  '<span style="color:' + color + ';background-color:' +
+  color + '">xxxxxxxx</span>';
   return replacement;
 }
 
@@ -78,7 +78,7 @@ var doNameReplacement = function() {
     var hovercard = $(this).attr('data-hovercard');
     if (hovercard) {
       if (hovercard.match(/\/user.php\?/)) {
-	      elements.push($(this));
+        elements.push($(this));
       }
     }
   });
@@ -89,20 +89,17 @@ var doNameReplacement = function() {
     }
   });
 
-    $.unique(elements).each(function(index) {
+  $.unique(elements).each(function(index) {
     replaceName($(this));
   });
 };
 
 function doImageBlurring() {
   $('.actorPhoto, .UFIActorImage, .profilePic').css(
-      '-webkit-filter', 'blur(5px)');
-}
+    '-webkit-filter', 'blur(5px)');
+  }
 
-genColors();
-resetMaps();
-chrome.extension.onRequest.addListener(function(r, s, sendResponse) {
+  genColors();
+  resetMaps();
   doNameReplacement();
   doImageBlurring();
-  sendResponse({});
-});
