@@ -1,0 +1,13 @@
+#!/bin/bash
+
+TMP_FOLDER=/tmp/blur-facebook-cws-zip
+CWS_ZIP_NAME=~/blur-facebook-cws.zip
+
+rm -rf $TMP_FOLDER
+mkdir -p $TMP_FOLDER
+cp *.js *.png *.css *.html *.json $TMP_FOLDER
+
+rm -f $CWS_ZIP_NAME
+pushd $TMP_FOLDER
+zip $CWS_ZIP_NAME -r .
+popd
