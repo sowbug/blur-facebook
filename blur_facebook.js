@@ -95,7 +95,11 @@ var doNameReplacement = function() {
 };
 
 function doImageBlurring() {
-  $('.actorPhoto, .UFIActorImage, .profilePic').css(
+  images = $('.actorPhoto, .UFIActorImage, .profilePic')
+  images = $.merge(images, $('.friendPhoto, .uiScaledImageContainer img'))
+  images = $.merge(images, $('.fbFriendsOnlineFacepileItem img'))
+  images = $.merge(images, $('.fbChatOrderedList img'))
+  images.css(
     '-webkit-filter', 'blur(5px)');
   }
 
